@@ -1,0 +1,24 @@
+/* Keep only relevant styles */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+.hero-section h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  word-break: break-word;
+}
+
+@media (max-width: 767px) {
+  .carousel-inner .carousel-item {
+    min-height: 250px;
+  }
+}
