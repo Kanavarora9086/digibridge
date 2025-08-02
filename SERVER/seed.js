@@ -2,10 +2,7 @@
 const mongoose = require("mongoose");
 const Location = require("./models/Location");
 
-mongoose.connect("mongodb://127.0.0.1:27017/digibridge", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect("mongodb://127.0.0.1:27017/digibridge");
 
 const sampleData = [
   { name: "Shri Mandir", type: "Mandir", lat: 28.6129, lng: 77.2295 },

@@ -1,37 +1,42 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import './assets/css/main.css';
 
 const Skills = () => (
   <>
     {/* Navbar */}
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
       <div className="container">
-        <a className="navbar-brand fw-bold text-primary" href="/">
+        <Link className="navbar-brand fw-bold text-primary" to="/">
           <i className="fas fa-bridge me-2"></i>DigiBridge
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link" href="/">Home</a>
+              <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="/skills">Learn Skills</a>
+              <Link className="nav-link active" to="/skills">Learn Skills</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/resources">Find Resources</a>
+              <Link className="nav-link" to="/resources">Find Resources</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/downloads">Downloads</a>
+              <Link className="nav-link" to="/downloads">Downloads</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/help">Get Help</a>
+              <Link className="nav-link" to="/help">Get Help</Link>
             </li>
           </ul>
         </div>

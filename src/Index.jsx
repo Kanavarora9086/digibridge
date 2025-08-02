@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './App.css';
 import './assets/css/main.css';
 
 const Index = () => {
-  useEffect(() => {
-    // Bootstrap JS initialization handled by bundle.min.js
-  }, []);
+  const [language, setLanguage] = useState('en');
+
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+    // Add your language switching logic here
+    console.log('Language changed to:', e.target.value);
+  };
 
   return (
     <>
@@ -34,7 +36,11 @@ const Index = () => {
               <li className="nav-item"><Link className="nav-link" to="/downloads">Downloads</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/help">Help</Link></li>
               <li className="nav-item d-flex align-items-center">
-                <select className="form-select form-select-sm ms-2 w-auto">
+                <select
+                  className="form-select form-select-sm ms-2 w-auto"
+                  value={language}
+                  onChange={handleLanguageChange}
+                >
                   <option value="en">English</option>
                   <option value="hi">हिंदी</option>
                 </select>
@@ -114,11 +120,27 @@ const Index = () => {
                 </div>
               ))}
             </div>
+            {/* Carousel Indicators */}
+            <div className="carousel-indicators">
+              {[0, 1, 2].map((idx) => (
+                <button
+                  key={idx}
+                  type="button"
+                  data-bs-target="#carouselExample"
+                  data-bs-slide-to={idx}
+                  className={idx === 0 ? "active" : ""}
+                  aria-current={idx === 0 ? "true" : undefined}
+                  aria-label={`Slide ${idx + 1}`}
+                />
+              ))}
+            </div>
             <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" />
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
             </button>
             <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-              <span className="carousel-control-next-icon" />
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Next</span>
             </button>
           </div>
         </div>

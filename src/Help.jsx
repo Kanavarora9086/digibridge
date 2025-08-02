@@ -1,11 +1,33 @@
-import React, { useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+// Bootstrap JS import not needed for React usage
 import "./assets/css/main.css";
 
 
-
 const Help = () => {
+  const [language, setLanguage] = useState("en");
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    question: ""
+  });
+
+  const handleLanguageChange = (e) => {
+    setLanguage(e.target.value);
+    // Add your language switching logic here
+    console.log("Language changed to:", e.target.value);
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+    if (showSuccess) setShowSuccess(false);
+  };
+
   const handleSubmit = (e) => {
     const form = e.target;
     if (!form.checkValidity()) {
@@ -13,8 +35,14 @@ const Help = () => {
       e.stopPropagation();
     } else {
       e.preventDefault();
-      document.getElementById("successMessage").classList.remove("d-none");
-      form.reset();
+      setShowSuccess(true);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        question: ""
+      });
     }
     form.classList.add("was-validated");
   };
@@ -24,26 +52,31 @@ const Help = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div className="container">
-          <a className="navbar-brand fw-bold text-primary" href="/">
+          <Link className="navbar-brand fw-bold text-primary" to="/">
             <i className="fas fa-bridge me-2"></i>DigiBridge
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
+            type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarNav"
-            type="button"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item"><a className="nav-link" href="/">Home</a></li>
-              <li className="nav-item"><a className="nav-link" href="/skills">Learn Skills</a></li>
-              <li className="nav-item"><a className="nav-link" href="/resources">Resources</a></li>
-              <li className="nav-item"><a className="nav-link" href="/downloads">Downloads</a></li>
-              <li className="nav-item"><a className="nav-link active" href="/help">Get Help</a></li>
+              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/skills">Learn Skills</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/resources">Resources</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/downloads">Downloads</Link></li>
+              <li className="nav-item"><Link className="nav-link active" to="/help">Get Help</Link></li>
               <li className="nav-item">
-                <select className="form-select form-select-sm ms-2" id="languageSwitch">
+                <select
+                  className="form-select form-select-sm ms-2"
+                  id="languageSwitch"
+                  value={language}
+                  onChange={handleLanguageChange}
+                >
                   <option value="en">English</option>
                   <option value="hi">हिंदी</option>
                 </select>
@@ -110,19 +143,13 @@ const Help = () => {
                   <p className="mb-0 mt-2 text-white-50">We'll get back to you within 24 hours</p>
                 </div>
                 <div className="card-body p-4">
-                  <div
-                    className="alert alert-success d-none"
-                    id="successMessage"
-                    role="alert"
-                  >
-                    <i className="fas fa-check-circle me-2"></i>
-                    <strong>Thank you!</strong> Your question has been submitted.
-                  </div>
-                  <form
-                    className="needs-validation"
-                    noValidate
-                    onSubmit={handleSubmit}
-                  >
+                  {showSuccess && (
+                    <div className="alert alert-success" role="alert">
+                      <i className="fas fa-check-circle me-2"></i>
+                      <strong>Thank you!</strong> Your question has been submitted.
+                    </div>
+                  )}
+                  <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                     <div className="row">
                       <div className="col-md-6 mb-3">
                         <label htmlFor="firstName" className="form-label">
@@ -133,6 +160,8 @@ const Help = () => {
                           className="form-control"
                           id="firstName"
                           required
+                          value={formData.firstName}
+                          onChange={handleInputChange}
                         />
                         <div className="invalid-feedback">Please enter your first name.</div>
                       </div>
@@ -145,6 +174,8 @@ const Help = () => {
                           className="form-control"
                           id="lastName"
                           required
+                          value={formData.lastName}
+                          onChange={handleInputChange}
                         />
                         <div className="invalid-feedback">Please enter your last name.</div>
                       </div>
@@ -159,6 +190,8 @@ const Help = () => {
                         className="form-control"
                         id="email"
                         required
+                        value={formData.email}
+                        onChange={handleInputChange}
                       />
                       <div className="invalid-feedback">Please enter a valid email.</div>
                     </div>
@@ -172,6 +205,8 @@ const Help = () => {
                         className="form-control"
                         id="subject"
                         required
+                        value={formData.subject}
+                        onChange={handleInputChange}
                       />
                       <div className="invalid-feedback">Please enter a subject.</div>
                     </div>
@@ -183,8 +218,10 @@ const Help = () => {
                       <textarea
                         className="form-control"
                         id="question"
-                        rows="6"
+                        rows={6}
                         required
+                        value={formData.question}
+                        onChange={handleInputChange}
                       ></textarea>
                       <div className="invalid-feedback">Please enter your question.</div>
                     </div>

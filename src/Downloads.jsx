@@ -1,5 +1,5 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/css/main.css"; // ✅ Correct path to main.css
 
@@ -9,7 +9,7 @@ const Downloads = () => (
     {/* Navbar */}
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow">
       <div className="container">
-        <a className="navbar-brand fw-bold" href="#">DigiBridge</a>
+        <Link className="navbar-brand fw-bold" to="/">DigiBridge</Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -20,11 +20,11 @@ const Downloads = () => (
         </button>
         <div className="collapse navbar-collapse" id="navMenu">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item"><a className="nav-link" href="index.html">Home</a></li>
-            <li className="nav-item"><a className="nav-link" href="skills.html">Learn Skills</a></li>
-            <li className="nav-item"><a className="nav-link" href="resources.html">Resources</a></li>
-            <li className="nav-item"><a className="nav-link active" href="downloads.html">Downloads</a></li>
-            <li className="nav-item"><a className="nav-link" href="help.html">Help</a></li>
+            <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/skills">Learn Skills</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/resources">Resources</Link></li>
+            <li className="nav-item"><Link className="nav-link active" to="/downloads">Downloads</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/help">Help</Link></li>
           </ul>
         </div>
       </div>
@@ -43,17 +43,17 @@ const Downloads = () => (
             {
               icon: "fas fa-file-pdf text-danger",
               title: "Digital Literacy PDF",
-              link: "assets/pdf/digital-literacy.pdf",
+              link: "/assets/pdf/digital-literacy.pdf",
             },
             {
               icon: "fas fa-book text-warning",
               title: "Computer Basics Guide",
-              link: "assets/pdf/computer-basics.pdf",
+              link: "/assets/pdf/computer-basics.pdf",
             },
             {
               icon: "fas fa-mobile-alt text-success",
               title: "Mobile App Tips",
-              link: "assets/pdf/mobile-apps.pdf",
+              link: "/assets/pdf/mobile-apps.pdf",
             },
           ].map((item, index) => (
             <div className="col-md-4" key={index}>

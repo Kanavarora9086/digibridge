@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import './assets/css/main.css';
 
 const Resources = () => {
   useEffect(() => {
@@ -39,18 +40,32 @@ const Resources = () => {
       );out;`;
 
       fetch(overpassUrl)
-        .then((res) => res.json())
-        .then((data) => {
-          data.elements.forEach((el) => {
-            const type = el.tags.amenity || "Amenity";
-            const name = el.tags.name || "Unnamed Location";
-
-            L.marker([el.lat, el.lon])
-              .addTo(map)
-              .bindPopup(`<b>${name}</b><br/>Type: ${type}`);
-          });
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+          return res.json();
         })
-        .catch((err) => console.error("❌ Failed to fetch OSM data:", err));
+        .then((data) => {
+          if (data && data.elements) {
+            data.elements.forEach((el) => {
+              const type = el.tags?.amenity || "Amenity";
+              const name = el.tags?.name || "Unnamed Location";
+
+              L.marker([el.lat, el.lon])
+                .addTo(map)
+                .bindPopup(`<b>${name}</b><br/>Type: ${type}`);
+            });
+          }
+        })
+        .catch((err) => {
+          console.error("❌ Failed to fetch OSM data:", err);
+          // Add user-friendly error message
+          const errorDiv = document.createElement('div');
+          errorDiv.className = 'alert alert-warning text-center';
+          errorDiv.innerHTML = '⚠️ Unable to load nearby amenities. Please check your internet connection or try again later.';
+          document.querySelector('#map').parentElement.insertBefore(errorDiv, document.querySelector('#map'));
+        });
     });
 
     map.on("locationerror", () => {
