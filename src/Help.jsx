@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/css/main.css";
@@ -24,9 +25,9 @@ const Help = () => {
       {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div className="container">
-          <a className="navbar-brand fw-bold text-primary" href="/">
+          <Link className="navbar-brand fw-bold text-primary" to="/">
             <i className="fas fa-bridge me-2"></i>DigiBridge
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             data-bs-toggle="collapse"
@@ -37,11 +38,11 @@ const Help = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
-              <li className="nav-item"><a className="nav-link" href="/">Home</a></li>
-              <li className="nav-item"><a className="nav-link" href="/skills">Learn Skills</a></li>
-              <li className="nav-item"><a className="nav-link" href="/resources">Resources</a></li>
-              <li className="nav-item"><a className="nav-link" href="/downloads">Downloads</a></li>
-              <li className="nav-item"><a className="nav-link active" href="/help">Get Help</a></li>
+              <li className="nav-item"><Link className="nav-link" to="/">Home</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/skills">Learn Skills</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/resources">Resources</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/downloads">Downloads</Link></li>
+              <li className="nav-item"><Link className="nav-link active" to="/help">Get Help</Link></li>
               <li className="nav-item">
                 <select className="form-select form-select-sm ms-2" id="languageSwitch">
                   <option value="en">English</option>
