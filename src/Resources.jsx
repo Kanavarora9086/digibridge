@@ -162,7 +162,7 @@ const Resources = () => {
                       className={`btn btn-outline-${item.color.split("-")[1]}`}
                       href={item.link}
                       target="_blank"
-                      rel="noreferrer"
+                      rel="noopener noreferrer"
                     >
                       {item.btnText}
                     </a>
