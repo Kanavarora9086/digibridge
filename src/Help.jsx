@@ -78,7 +78,6 @@ const Help = () => {
                   onChange={handleLanguageChange}
                 >
                   <option value="en">English</option>
-                  <option value="hi">हिंदी</option>
                 </select>
               </li>
             </ul>
