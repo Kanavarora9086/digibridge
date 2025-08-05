@@ -85,11 +85,6 @@ const Downloads = () => (
         <div className="row g-4">
           {[
             {
-              src: "https://www.youtube.com/embed/IqKieDk5t8U",
-              title: "💻 Computer Basics (Hindi)",
-              desc: "Understand how computers work, common terms, and basic operations.",
-            },
-            {
               src: "https://www.youtube.com/embed/Z_Dyuhc6f8E",
               title: "🌐 Using Internet & Email",
               desc: "Learn to browse the web, search, and use email securely.",
